@@ -1,0 +1,323 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Fallen Blades (FBL) – Prime League Team</title>
+<meta name="description" content="Fallen Blades (FBL) – League of Legends Team in der Prime League.">
+<style>
+  /* ===== Farben: hier kannst du das Design anpassen ===== */
+  :root {
+    --akzent: #D7263D;      /* Teamfarbe (Rot) */
+    --hintergrund: #0E0F12;
+    --karte: #16181D;
+    --platzhalter: #1F2228;
+    --linie: #23252B;
+    --rahmen: #3A3D45;
+    --text: #E8E6E3;
+    --text-leise: #A9A9B2;
+    --label: #8E8E98;
+  }
+
+  * { box-sizing: border-box; }
+
+  /* Sanftes Scrollen bei Klick auf Links wie "Zum Roster" */
+  html { scroll-behavior: smooth; }
+  section, #top { scroll-margin-top: 16px; }
+  /* Wer in Windows "Animationen aus" eingestellt hat, bekommt kein Scroll-Gleiten */
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+  }
+  body {
+    margin: 0;
+    background: var(--hintergrund);
+    color: var(--text);
+    font-family: "Segoe UI", system-ui, -apple-system, Roboto, Arial, sans-serif;
+  }
+  a { color: var(--text); }
+  a:hover { color: #fff; }
+  .titel-schrift {
+    font-family: Oswald, Bahnschrift, "Arial Narrow", Impact, sans-serif;
+    text-transform: uppercase;
+  }
+  .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+  section { border-top: 1px solid var(--linie); }
+  h2 { margin: 0; font-size: 44px; font-weight: 600; letter-spacing: 1px; }
+
+  /* Buttons */
+  .btn {
+    display: inline-block; padding: 14px 24px; border-radius: 6px;
+    font-weight: 600; text-decoration: none;
+  }
+  .btn-akzent { background: var(--akzent); color: #fff; }
+  .btn-rand { border: 1px solid var(--rahmen); }
+
+  /* Kopfzeile */
+  header { border-bottom: 1px solid var(--linie); }
+  .kopf {
+    display: flex; flex-wrap: wrap; align-items: center;
+    justify-content: space-between; gap: 16px; padding-top: 20px; padding-bottom: 20px;
+  }
+  .logo { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+  .logo span { font-size: 22px; font-weight: 700; letter-spacing: 2px; }
+  nav { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+  nav a { padding: 12px 14px; text-decoration: none; font-weight: 500; font-size: 15px; }
+  nav a.btn-akzent { padding: 12px 18px; }
+
+  /* Startbereich */
+  .hero { padding-top: 96px; padding-bottom: 88px; display: flex; flex-direction: column; gap: 24px; }
+  .hero .liga { margin: 0; font-size: 14px; font-weight: 600; letter-spacing: 3px; text-transform: uppercase; color: var(--akzent); }
+  .hero h1 { margin: 0; font-size: clamp(56px, 9vw, 120px); line-height: 0.95; letter-spacing: 2px; font-weight: 700; }
+  .hero .text { margin: 0; max-width: 560px; font-size: 18px; line-height: 1.6; color: var(--text-leise); }
+  .hero .knoepfe { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 8px; }
+
+  /* Roster */
+  .bereich { padding-top: 80px; padding-bottom: 80px; display: flex; flex-direction: column; gap: 32px; }
+  .bereich-kopf { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 12px; }
+  .hinweis { margin: 0; font-size: 15px; color: var(--text-leise); }
+  .raster { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 16px; }
+  .spieler-karte {
+    text-align: left; cursor: pointer; padding: 0; background: var(--karte);
+    border: 2px solid var(--linie); border-radius: 10px; overflow: hidden;
+    color: var(--text); font-family: inherit;
+  }
+  .spieler-karte:hover { border-color: var(--rahmen); }
+  .spieler-karte.aktiv { border-color: var(--akzent); }
+  .foto {
+    height: 200px; background: var(--platzhalter); display: flex; align-items: center;
+    justify-content: center; color: #6E7079; font-size: 14px;
+  }
+  .foto img { width: 100%; height: 100%; object-fit: cover; }
+  .karte-info { padding: 16px; display: flex; flex-direction: column; gap: 6px; }
+  .rolle { font-size: 12px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: var(--akzent); }
+  .name { font-size: 24px; font-weight: 600; }
+  .rang { font-size: 14px; color: var(--text-leise); }
+
+  /* Detailansicht */
+  .detail {
+    background: var(--karte); border: 1px solid var(--linie); border-radius: 12px;
+    padding: 32px; display: flex; flex-wrap: wrap; gap: 32px;
+  }
+  .detail .foto { flex: 0 0 220px; height: 260px; border-radius: 8px; overflow: hidden; }
+  .detail-text { flex: 999 1 420px; min-width: 0; display: flex; flex-direction: column; gap: 20px; }
+  .detail-text .name { font-size: 40px; font-weight: 700; }
+  .werte { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+  .wert-label { display: block; font-size: 12px; text-transform: uppercase; letter-spacing: 1px; color: var(--label); margin-bottom: 4px; }
+  .wert { font-weight: 600; }
+  .bio { margin: 0; font-size: 16px; line-height: 1.6; color: #C9C9D0; }
+  .links { display: flex; flex-wrap: wrap; gap: 10px; }
+  .links a { padding: 12px 16px; font-size: 14px; }
+
+  /* Spielplan */
+  .spiel {
+    display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center;
+    gap: 16px; padding: 20px 24px; background: var(--karte);
+    border: 1px solid var(--linie); border-radius: 10px;
+  }
+  .spiel .gegner { font-size: 22px; font-weight: 600; }
+
+  /* Wir suchen */
+  .suchen { padding-top: 80px; padding-bottom: 80px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 24px; }
+  .suchen > div { flex: 999 1 420px; min-width: 0; display: flex; flex-direction: column; gap: 12px; }
+
+  .unterpunkt { margin: 12px 0 0; font-size: 13px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: var(--akzent); }
+  .such-text { margin: 0; font-size: 18px; line-height: 1.6; }
+  .bieten { margin: 4px 0; padding-left: 20px; color: var(--text-leise); line-height: 1.8; font-size: 16px; }
+  .bieten li::marker { color: var(--akzent); }
+  .discord-box { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 16px; margin-top: 8px; }
+  .suchen > div { max-width: 680px; }
+  #discord-knopf { border: none; cursor: pointer; font-family: inherit; font-size: 16px; }
+
+  footer { border-top: 1px solid var(--linie); }
+  footer .container { padding-top: 28px; padding-bottom: 28px; font-size: 14px; color: var(--label); }
+
+  @media (max-width: 600px) {
+    .werte { grid-template-columns: 1fr; }
+    .detail { padding: 20px; }
+    .detail .foto { flex-basis: 100%; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ===== KOPFZEILE ===== -->
+<header>
+  <div class="container kopf">
+    <a href="#top" class="logo">
+      <svg width="36" height="36" viewBox="0 0 36 36" aria-hidden="true">
+        <circle cx="18" cy="4.5" r="2.5" fill="#E8E6E3"></circle>
+        <rect x="16.5" y="7" width="3" height="5" fill="#E8E6E3"></rect>
+        <rect x="9" y="12" width="18" height="2.5" rx="1" fill="#E8E6E3"></rect>
+        <path d="M15 15.5 L21 15.5 L18 34 Z" fill="#D7263D"></path>
+      </svg>
+      <span class="titel-schrift">FBL</span>
+    </a>
+    <nav>
+      <a href="#roster">Team</a>
+      <a href="#spielplan">Spielplan</a>
+      <a href="#suchen">Wir suchen</a>
+      <a href="about.html">About</a>
+      <a href="#suchen" class="btn btn-akzent">Discord</a>
+    </nav>
+  </div>
+</header>
+
+<!-- ===== STARTBEREICH ===== -->
+<div id="top" class="container hero">
+  <p class="liga">Prime League · X. Division · [Split 2027]</p>
+  <h1 class="titel-schrift">Fallen<br>Blades</h1>
+  <p class="text">United by the blade. Driven by ambition.<br>Not every fallen blade is broken. 2027.</p>
+  <div class="knoepfe">
+    <a href="#roster" class="btn btn-akzent">Zum Roster</a>
+    <a href="#suchen" class="btn btn-rand">Wir suchen Spieler</a>
+  </div>
+</div>
+
+<!-- ===== ROSTER ===== -->
+<section id="roster">
+  <div class="container bereich">
+    <div class="bereich-kopf">
+      <h2 class="titel-schrift">Roster</h2>
+      <p class="hinweis">Klick auf einen Spieler für mehr Infos</p>
+    </div>
+    <div class="raster" id="raster"></div>
+    <div class="detail" id="detail"></div>
+  </div>
+</section>
+
+<!-- ===== SPIELPLAN ===== -->
+<section id="spielplan">
+  <div class="container bereich">
+    <h2 class="titel-schrift">Spielplan</h2>
+    <div class="spiel">
+      <span class="gegner titel-schrift">FBL vs. [Gegner]</span>
+      <span class="hinweis">[TT.MM.JJJJ] · [Uhrzeit] · Spieltag [X]</span>
+    </div>
+  </div>
+</section>
+
+<!-- ===== WIR SUCHEN ===== -->
+<section id="suchen">
+  <div class="container suchen">
+    <div>
+      <h2 class="titel-schrift">Wir suchen</h2>
+      <h3 class="unterpunkt">Was wir suchen</h3>
+      <p class="such-text">Spieler*innen, die vor allem eins wollen: besser werden – Aktivität bei Aktivitäten.</p>
+      <p class="hinweis">Rang? Ab Diamond wäre ideal; für alle anderen sind wir offen: Zeig dich im Tryout!</p>
+      <h3 class="unterpunkt">Was wir bieten</h3>
+      <ul class="bieten">
+        <li>Einen strukturierten und intensiven Plan, wie wir unsere Wochen gestalten</li>
+        <li>Sämtliche Excel-Tabellen, die bei Bedarf noch erweitert werden können</li>
+        <li>Jahrelange Erfahrung in Orga und Teamleitung</li>
+        <li>Mindestens ein bis zwei Trainingseinheiten pro Woche, ggf. auch Online-Teamaktivitäten (Absprache ist uns sehr wichtig!)</li>
+        <li>Menschlichkeit; lockere, ehrliche, direkte und offene Kommunikation – keine Hierarchie</li>
+      </ul>
+      <p class="such-text">Hört sich zu gut an? Hast du noch Fragen? Lass uns quatschen und add mich gerne!</p>
+      <!-- Discord-Name: Klick kopiert den Namen in die Zwischenablage -->
+      <div class="discord-box">
+        <button type="button" class="btn btn-akzent" id="discord-knopf">Discord: lysoqa</button>
+        <span class="hinweis" id="discord-info">Klicken zum Kopieren</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">© Fallen Blades (FBL)</div>
+</footer>
+
+<script>
+// =====================================================================
+//  SPIELERDATEN – nur diesen Teil musst du später anpassen.
+//  Jeder Spieler steht in { ... }. Links leer lassen ("") = wird nicht angezeigt.
+//  foto: Dateiname eines Bildes im selben Ordner, z. B. "top.jpg" (oder "")
+//  rangFarbe: Farbe für Rang + Peak, z. B. "#9B4DCC" (oder "" = normale Farbe)
+// =====================================================================
+const spieler = [
+  { rolle: "Top",     name: "Pending...", rang: "[Rang]", peak: "[Peak]", rangFarbe: "", champs: "[Champ 1 · 2 · 3]", herkunft: "[Vorname] · [Land]", bio: "[Kurze Bio]", foto: "", opgg: "", twitch: "", x: "", youtube: "" },
+  { rolle: "Jungle",  name: "Pending...", rang: "[Rang]", peak: "[Peak]", rangFarbe: "", champs: "[Champ 1 · 2 · 3]", herkunft: "[Vorname] · [Land]", bio: "[Kurze Bio]", foto: "", opgg: "", twitch: "", x: "", youtube: "" },
+  { rolle: "Mid",     name: "Pending...", rang: "[Rang]", peak: "[Peak]", rangFarbe: "", champs: "[Champ 1 · 2 · 3]", herkunft: "[Vorname] · [Land]", bio: "[Kurze Bio]", foto: "", opgg: "", twitch: "", x: "", youtube: "" },
+  { rolle: "ADC",     name: "Lysoqa",     rang: "Master 766 LP", peak: "Master 766 LP", rangFarbe: "#9B4DCC", champs: "Jhin · Kai'Sa · Ezreal", herkunft: "Lennox · Deutschland",
+    bio: "Prime-League-ADC in Division 5 seit 3 Jahren. Teamleader. Mag Salz.", foto: "lysoqa.jpg",
+    opgg: "https://op.gg/de/lol/summoners/euw/LYSOQA-0000", twitch: "", x: "https://x.com/Lysoqa", youtube: "https://www.youtube.com/@Lysoqa" },
+  { rolle: "Support", name: "Pending...", rang: "[Rang]", peak: "[Peak]", rangFarbe: "", champs: "[Champ 1 · 2 · 3]", herkunft: "[Vorname] · [Land]", bio: "[Kurze Bio]", foto: "", opgg: "", twitch: "", x: "", youtube: "" }
+];
+
+// =====================================================================
+//  Ab hier: Technik, die die Karten und die Detailansicht baut.
+// =====================================================================
+let ausgewaehlt = 3; // 3 = ADC wird beim Laden zuerst angezeigt (Zählung startet bei 0)
+
+function rangStil(s) {
+  return s.rangFarbe ? ' style="color:' + s.rangFarbe + '"' : "";
+}
+
+function fotoHtml(s) {
+  if (s.foto) return '<img src="' + s.foto + '" alt="Foto von ' + s.name + '">';
+  return "[Spielerfoto]";
+}
+
+function linkHtml(text, url) {
+  if (!url) return "";
+  return '<a class="btn btn-rand" href="' + url + '" target="_blank" rel="noopener">' + text + "</a>";
+}
+
+function zeigeKarten() {
+  const raster = document.getElementById("raster");
+  raster.innerHTML = "";
+  spieler.forEach(function (s, i) {
+    const karte = document.createElement("button");
+    karte.type = "button";
+    karte.className = "spieler-karte" + (i === ausgewaehlt ? " aktiv" : "");
+    karte.setAttribute("aria-pressed", i === ausgewaehlt);
+    karte.innerHTML =
+      '<div class="foto">' + fotoHtml(s) + "</div>" +
+      '<div class="karte-info">' +
+        '<span class="rolle">' + s.rolle + "</span>" +
+        '<span class="name titel-schrift">' + s.name + "</span>" +
+        '<span class="rang"' + rangStil(s) + ">" + s.rang + "</span>" +
+      "</div>";
+    karte.addEventListener("click", function () {
+      ausgewaehlt = i;
+      zeigeKarten();
+      zeigeDetail();
+    });
+    raster.appendChild(karte);
+  });
+}
+
+function zeigeDetail() {
+  const s = spieler[ausgewaehlt];
+  document.getElementById("detail").innerHTML =
+    '<div class="foto">' + fotoHtml(s) + "</div>" +
+    '<div class="detail-text">' +
+      "<div>" +
+        '<span class="rolle">' + s.rolle + "</span><br>" +
+        '<span class="name titel-schrift">' + s.name + "</span><br>" +
+        '<span class="rang">' + s.herkunft + "</span>" +
+      "</div>" +
+      '<div class="werte">' +
+        '<div><span class="wert-label">Aktueller Rang</span><span class="wert"' + rangStil(s) + ">" + s.rang + "</span></div>" +
+        '<div><span class="wert-label">Peak-Rang</span><span class="wert"' + rangStil(s) + ">" + s.peak + "</span></div>" +
+        '<div><span class="wert-label">Main-Champions</span><span class="wert">' + s.champs + "</span></div>" +
+      "</div>" +
+      '<p class="bio">' + s.bio + "</p>" +
+      '<div class="links">' + linkHtml("op.gg", s.opgg) + linkHtml("Twitch", s.twitch) + linkHtml("X / Twitter", s.x) + linkHtml("YouTube", s.youtube) + "</div>" +
+    "</div>";
+}
+
+zeigeKarten();
+zeigeDetail();
+
+// Discord-Knopf: kopiert den Namen in die Zwischenablage
+document.getElementById("discord-knopf").addEventListener("click", function () {
+  const info = document.getElementById("discord-info");
+  navigator.clipboard.writeText("lysoqa").then(function () {
+    info.textContent = "Kopiert! In Discord unter „Freund hinzufügen“ einfügen.";
+  }).catch(function () {
+    info.textContent = "Discord-Name: lysoqa";
+  });
+});
+</script>
+</body>
+</html>
