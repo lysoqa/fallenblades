@@ -237,10 +237,12 @@ const spieler = [
   { rolle: "Top",     name: "Pending...", rang: "[Rang]", peak: "[Peak]", rangFarbe: "", champs: "[Champ 1 · 2 · 3]", herkunft: "[Vorname] · [Land]", bio: "[Kurze Bio]", foto: "", opgg: "", twitch: "", x: "", youtube: "" },
   { rolle: "Jungle",  name: "Pending...", rang: "[Rang]", peak: "[Peak]", rangFarbe: "", champs: "[Champ 1 · 2 · 3]", herkunft: "[Vorname] · [Land]", bio: "[Kurze Bio]", foto: "", opgg: "", twitch: "", x: "", youtube: "" },
   { rolle: "Mid",     name: "Pending...", rang: "[Rang]", peak: "[Peak]", rangFarbe: "", champs: "[Champ 1 · 2 · 3]", herkunft: "[Vorname] · [Land]", bio: "[Kurze Bio]", foto: "", opgg: "", twitch: "", x: "", youtube: "" },
-  { rolle: "ADC",     name: "Lysoqa",     rang: "Master 766 LP", peak: "Master 766 LP", rangFarbe: "#9B4DCC", champs: "Jhin · Kai'Sa · Ezreal", herkunft: "Lennox · Deutschland",
+  { rolle: "ADC",     name: "Lysoqa",     rang: "Master 768 LP", peak: "Master 856 LP", rangFarbe: "#9B4DCC", champs: "Jhin · Kai'Sa · Ezreal", herkunft: "Lennox · Deutschland",
     bio: "Prime-League-ADC in Division 5 seit 3 Jahren. Teamleader. Mag Salz.", foto: "lysoqa.jpg",
     opgg: "https://op.gg/de/lol/summoners/euw/LYSOQA-0000", twitch: "", x: "https://x.com/Lysoqa", youtube: "https://www.youtube.com/@Lysoqa" },
-  { rolle: "Support", name: "Pending...", rang: "[Rang]", peak: "[Peak]", rangFarbe: "", champs: "[Champ 1 · 2 · 3]", herkunft: "[Vorname] · [Land]", bio: "[Kurze Bio]", foto: "", opgg: "", twitch: "", x: "", youtube: "" }
+  { rolle: "Support", name: "Nötskal",    rang: "[Rang] 555 LP", peak: "[Rang] 559 LP", rangFarbe: "", champs: "Nautilus · Rell · Lulu", herkunft: "",
+    bio: "WoW > LoL", foto: "notskal.jpg",
+    opgg: "", twitch: "", x: "", youtube: "" }
 ];
 
 // =====================================================================
@@ -294,7 +296,7 @@ function zeigeDetail() {
       "<div>" +
         '<span class="rolle">' + s.rolle + "</span><br>" +
         '<span class="name titel-schrift">' + s.name + "</span><br>" +
-        '<span class="rang">' + s.herkunft + "</span>" +
+        (s.herkunft ? '<span class="rang">' + s.herkunft + "</span>" : "") +
       "</div>" +
       '<div class="werte">' +
         '<div><span class="wert-label">Aktueller Rang</span><span class="wert"' + rangStil(s) + ">" + s.rang + "</span></div>" +
